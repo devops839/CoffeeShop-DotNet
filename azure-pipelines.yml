@@ -1,0 +1,62 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  projectFile: '**/webapp.csproj'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+stages:
+  - stage: Build_Stage
+    displayName: Build Stage
+    jobs:
+      - job: Build_Stage
+        displayName: Build Stage
+        steps:
+        - task: UseDotNet@2
+          inputs:
+            packageType: 'sdk'
+            version: '8.0.404'
+            installationPath: $(Agent.ToolsDirectory)/dotnet
+
+        - task: NuGetCommand@2
+          inputs:
+            command: 'restore'
+            restoreSolution: '$(projectFile)'
+
+        - task: VSBuild@1
+          inputs:
+            solution: '$(projectFile)'
+            msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
+            platform: '$(buildPlatform)'
+            configuration: '$(buildConfiguration)'
+
+        - task: PublishBuildArtifacts@1
+          displayName: 'Publish Artifact'
+          inputs:
+            PathtoPublish: '$(build.artifactStagingDirectory)'
+            ArtifactName: 'dotnet_drop'
+            publishLocation: 'Container'
+
+  - stage: Deploy_Stage
+    displayName: Deploy To Azure App Services
+    jobs:
+      - job: Deploy_Stage
+        displayName: Deploy To Azure App Services
+        steps:
+        - task: DownloadBuildArtifacts@1
+          inputs:
+            buildType: 'current'
+            downloadType: 'single'
+            artifactName: 'dotnet_drop'
+            downloadPath: '$(System.ArtifactsDirectory)'
+        - task: AzureRmWebAppDeployment@4
+          inputs:
+            ConnectionType: 'AzureRM'
+            azureSubscription: 'Pay-As-You-Go(1)(142ced07-dc62-4882-a02f-d99696ac9d8c)'
+            appType: 'webApp'
+            WebAppName: 'testwa839'
+            packageForLinux: '$(System.ArtifactsDirectory)/dotnet_drop/*.zip'
