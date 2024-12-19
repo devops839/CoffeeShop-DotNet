@@ -1,0 +1,19 @@
+@page
+@model CoffeeShop.Pages.MenuModel
+@{
+    ViewData["Title"] = "Coffee Menu";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="coffee-menu">
+    @foreach (var coffee in Model.CoffeeProducts)
+    {
+        <div class="coffee-item">
+            <h3>@coffee.Name</h3>
+            <p>@coffee.Description</p>
+            <p>Price: $@coffee.Price</p>
+            <a href="/Order/Create?id=@coffee.Id">Order Now</a>
+        </div>
+    }
+</div>

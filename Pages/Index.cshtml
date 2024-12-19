@@ -1,0 +1,55 @@
+﻿@page
+@model CoffeeShop.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    <h1>Welcome to Our Coffee Shop!</h1>
+
+    <h2><i>Sip into Happiness – Explore Our Finest Coffee Creations</i></h2>
+    <div class="coffee-grid">
+        <div class="coffee-card">
+            <img src="~/images/espresso.jpg" alt="Espresso" />
+            <h3>Espresso</h3>
+            <p>Bold and rich, the essence of coffee in a single shot.</p>
+            <p class="price">Price: $3.50</p>
+            <button class="order-btn" onclick="addToCart('Espresso')">Place Order</button>
+        </div>
+        <div class="coffee-card">
+            <img src="~/images/cappuccino.jpg" alt="Cappuccino" />
+            <h3>Cappuccino</h3>
+            <p>Espresso topped with steamed milk and fluffy foam.</p>
+            <p class="price">Price: $4.00</p>
+            <button class="order-btn" onclick="addToCart('Cappuccino')">Place Order</button>
+        </div>
+        <div class="coffee-card">
+            <img src="~/images/iced_coffee.jpg" alt="Iced Coffee" />
+            <h3>Iced Coffee</h3>
+            <p>Refreshing cold brew served over ice.</p>
+            <p class="price">Price: $4.50</p>
+            <button class="order-btn" onclick="addToCart('Iced Coffee')">Place Order</button>
+        </div>
+        <div class="coffee-card">
+            <img src="~/images/americano.jpg" alt="Americano" />
+            <h3>Americano</h3>
+            <p>Smooth espresso diluted with hot water.</p>
+            <p class="price">Price: $3.00</p>
+            <button class="order-btn" onclick="addToCart('Americano')">Place Order</button>
+        </div>
+        <div class="coffee-card">
+            <img src="~/images/latte.jpg" alt="Latte" />
+            <h3>Latte</h3>
+            <p>Rich espresso blended with creamy steamed milk.</p>
+            <p class="price">Price: $4.50</p>
+            <button class="order-btn" onclick="addToCart('Latte')">Place Order</button>
+        </div>
+        <div class="coffee-card">
+            <img src="~/images/mocha.jpg" alt="Mocha" />
+            <h3>Mocha</h3>
+            <p>Espresso with chocolate and steamed milk.</p>
+            <p class="price">Price: $5.00</p>
+            <button class="order-btn" onclick="addToCart('Mocha')">Place Order</button>
+        </div>
+    </div>
+</div>

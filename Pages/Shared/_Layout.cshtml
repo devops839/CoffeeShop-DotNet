@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CoffeeShop</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="main-content">
+        @RenderBody()
+        <!-- Cart Section (Place this just above the footer) -->
+        <div id="cart-display" class="cart-section"></div>
+    </div>
+    <!-- Footer outside of content to prevent pushing content down -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 CoffeeShop. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="~/js/site.js"></script>
+</body>
+</html>
